@@ -261,7 +261,6 @@ This project is licensed under the MIT License.
 ## Support
 
 For questions or issues:
-- 📧 Email: abhirammarupaka2208@gmail.com
 - 🐛 Issues: [GitHub Issues](https://github.com/Abhirammm2208/Hintro-Assignment/issues)
 
 ---
