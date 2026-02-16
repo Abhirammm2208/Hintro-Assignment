@@ -1,61 +1,75 @@
 # Real-Time Task Collaboration Platform
 
-A full-stack application for real-time task management and team collaboration, similar to Trello/Notion. Built with React, Node.js/Express, PostgreSQL, and Socket.io.
+A full-stack real-time task management and collaboration platform, similar to Trello/Notion. Built with React, Node.js/Express, PostgreSQL, and Socket.io.
+
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-blue)](https://github.com/Abhirammm2208/Hintro-Assignment)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+
+## 📚 Documentation
+
+- **[Setup Instructions](#setup-instructions)** - Get started in 5 minutes
+- **[API Documentation](API_DOCUMENTATION.md)** - Complete API reference
+- **[Architecture Guide](ARCHITECTURE.md)** - System design and scalability
+- **[Database Schema](DATABASE_SCHEMA.md)** - Database structure and relationships
+- **[Demo Credentials](#demo-credentials)** - Test accounts for quick access
 
 ## Table of Contents
 
 - [Features](#features)
 - [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Setup Instructions](#setup-instructions)
-- [API Documentation](#api-documentation)
-- [Architecture Overview](#architecture-overview)
-- [Database Schema](#database-schema)
-- [Real-time Features](#real-time-features)
+- [Quick Start](#quick-start)
 - [Demo Credentials](#demo-credentials)
-- [Deployment](#deployment)
-- [Assumptions & Trade-offs](#assumptions--trade-offs)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Features
 
-### Core Features
-- ✅ **User Authentication**: Secure signup/login with JWT tokens
-- ✅ **Board Management**: Create, update, delete boards with descriptions
-- ✅ **Lists & Tasks**: Organize tasks in lists within boards
-- ✅ **Drag & Drop**: Drag tasks across lists with real-time synchronization
-- ✅ **User Assignment**: Assign multiple users to tasks
-- ✅ **Activity Tracking**: Detailed activity logs for all operations
-- ✅ **Real-time Updates**: WebSocket-based live synchronization across users
-- ✅ **Pagination & Search**: Search boards and filter activities
-- ✅ **Team Collaboration**: Add members to boards for group work
+### Core Features ✨
+- 🔐 **User Authentication** - Secure JWT-based signup/login
+- 📋 **Board Management** - Create and organize multiple project boards
+- 📝 **Lists & Tasks** - Organize tasks in customizable lists
+- 🎯 **Drag & Drop** - Move tasks between lists with real-time sync
+- 👥 **Team Collaboration** - Assign team members to tasks
+- 📅 **Due Dates & Priorities** - Task scheduling with priority levels (High/Medium/Low)
+- 🏷️ **Labels & Tags** - Categorize tasks with colored labels
+- 💬 **Comments** - Real-time discussion on tasks
+- 📊 **Activity Logs** - Track all board activities
+- 🔍 **Search & Filter** - Find boards and tasks quickly
+- ⚡ **Real-time Updates** - Live synchronization across all users
 
-### Technical Features
-- State management with Zustand
-- Responsive design (mobile-friendly)
-- Error handling and validation
+### Technical Features 🛠️
+- WebSocket real-time communication
+- Responsive mobile-friendly design
+- Optimistic UI updates
 - Database indexing for performance
-- RESTful API design
-- Socket.io for real-time features
+- RESTful API architecture
 
 ## Tech Stack
 
-### Backend
-- **Runtime**: Node.js
-- **Framework**: Express.js
-- **Database**: PostgreSQL
-- **Real-time**: Socket.io
-- **Authentication**: JWT, bcrypt
-- **Validation**: Joi
+**Backend:**
+- Node.js + Express.js
+- PostgreSQL database
+- Socket.io for real-time
+- JWT authentication
+- bcrypt password hashing
 
-### Frontend
-- **UI Framework**: React 18
-- **State Management**: Zustand
-- **HTTP Client**: Axios
-- **Drag & Drop**: react-beautiful-dnd
-- **Real-time**: Socket.io-client
-- **Routing**: React Router v6
+**Frontend:**
+- React 18
+- Zustand state management
+- Material-UI components
+- react-beautiful-dnd for drag-drop
+- Axios HTTP client
+- Socket.io-client
 
-## Project Structure
+---
+
+## Quick Start
+
+### Prerequisites
+- Node.js v14+
+- PostgreSQL v12+
+- npm or yarn
 
 ```
 Hintro Assignment/
@@ -104,585 +118,152 @@ Hintro Assignment/
 │   └── package.json
 ├── .gitignore
 └── README.md
-```
+---
 
-## Setup Instructions
+## Quick Start
 
 ### Prerequisites
-- Node.js (v14 or higher)
-- PostgreSQL (v12 or higher)
+- Node.js v14+
+- PostgreSQL v12+
 - npm or yarn
 
-### Backend Setup
-
-1. **Install dependencies**
-   ```bash
-   cd backend
-   npm install
-   ```
-
-2. **Setup PostgreSQL database**
-   ```bash
-   # Create database
-   createdb task_collaboration
-
-   # Run schema
-   psql task_collaboration < schema.sql
-   ```
-
-3. **Configure environment**
-   ```bash
-   cp .env.example .env
-   # Edit .env with your configuration:
-   # - DATABASE_URL (PostgreSQL connection string)
-   # - JWT_SECRET (strong random string)
-   # - PORT (default 5000)
-   # - FRONTEND_URL (default http://localhost:3000)
-   ```
-
-4. **Start backend server**
-   ```bash
-   npm run dev  # Development mode with nodemon
-   # or
-   npm start    # Production mode
-   ```
-
-### Frontend Setup
-
-1. **Install dependencies**
-   ```bash
-   cd frontend
-   npm install
-   ```
-
-2. **Configure environment**
-   ```bash
-   # Create .env file
-   echo "REACT_APP_API_URL=http://localhost:5000/api" > .env
-   echo "REACT_APP_SOCKET_URL=http://localhost:5000" >> .env
-   ```
-
-3. **Start frontend server**
-   ```bash
-   npm start
-   ```
-
-The application will open at `http://localhost:3000`
-
-### Verification
-
-- Backend health check: `curl http://localhost:5000/health`
-- Frontend: Open browser to `http://localhost:3000`
-- Create account or use demo credentials
-
-## API Documentation
-
-### Authentication Endpoints
-
-#### Sign Up
-```
-POST /api/auth/signup
-Content-Type: application/json
-
-{
-  "username": "john_doe",
-  "email": "john@example.com",
-  "password": "password123"
-}
-
-Response: { user: {...}, token: "jwt_token" }
+### 1. Clone Repository
+```bash
+git clone https://github.com/Abhirammm2208/Hintro-Assignment.git
+cd "Hintro Assignment"
 ```
 
-#### Login
-```
-POST /api/auth/login
-Content-Type: application/json
+### 2. Setup Database
+```bash
+# Create database
+createdb task_collaboration
 
-{
-  "email": "john@example.com",
-  "password": "password123"
-}
+# Run schema
+cd backend
+psql task_collaboration < schema.sql
+psql task_collaboration < schema_updates.sql
 
-Response: { user: {...}, token: "jwt_token" }
-```
-
-#### Get Current User
-```
-GET /api/auth/me
-Authorization: Bearer <token>
+# (Optional) Seed test users
+psql task_collaboration < seed_users.sql
 ```
 
-### Board Endpoints
+### 3. Configure Backend
+```bash
+cd backend
+npm install
 
-#### Create Board
-```
-POST /api/boards
-Authorization: Bearer <token>
+# Create .env file
+cat > .env << EOF
+DATABASE_URL=postgresql://username:password@localhost:5432/task_collaboration
+JWT_SECRET=your_super_secret_jwt_key_change_in_production
+PORT=5000
+FRONTEND_URL=http://localhost:3000
+EOF
 
-{
-  "name": "My Project",
-  "description": "Project description"
-}
-```
-
-#### Get All Boards
-```
-GET /api/boards?search=&page=1&limit=10
-Authorization: Bearer <token>
+# Start backend server
+npm start
 ```
 
-#### Get Board with Lists and Tasks
-```
-GET /api/boards/:boardId
-Authorization: Bearer <token>
-```
+### 4. Configure Frontend
+```bash
+cd frontend
+npm install
 
-#### Update Board
-```
-PUT /api/boards/:boardId
-Authorization: Bearer <token>
+# Create .env file
+cat > .env << EOF
+REACT_APP_API_URL=http://localhost:5000/api
+REACT_APP_SOCKET_URL=http://localhost:5000
+EOF
 
-{
-  "name": "Updated Name",
-  "description": "Updated description"
-}
+# Start frontend
+npm start
 ```
 
-#### Delete Board
-```
-DELETE /api/boards/:boardId
-Authorization: Bearer <token>
-```
+### 5. Access Application
+- **Frontend**: http://localhost:3000
+- **Backend API**: http://localhost:5000/api
+- **Health Check**: http://localhost:5000/health
 
-#### Add Board Member
-```
-POST /api/boards/:boardId/members
-Authorization: Bearer <token>
-
-{
-  "email": "user@example.com"
-}
-```
-
-#### Get Board Members
-```
-GET /api/boards/:boardId/members
-Authorization: Bearer <token>
-```
-
-### List Endpoints
-
-#### Create List
-```
-POST /api/lists
-Authorization: Bearer <token>
-
-{
-  "boardId": "board-uuid",
-  "name": "To Do"
-}
-```
-
-#### Update List
-```
-PUT /api/lists/:listId
-Authorization: Bearer <token>
-
-{
-  "name": "Updated Name",
-  "position": 1
-}
-```
-
-#### Delete List
-```
-DELETE /api/lists/:listId
-Authorization: Bearer <token>
-```
-
-### Task Endpoints
-
-#### Create Task
-```
-POST /api/tasks
-Authorization: Bearer <token>
-
-{
-  "listId": "list-uuid",
-  "boardId": "board-uuid",
-  "title": "Task Title",
-  "description": "Task description"
-}
-```
-
-#### Update Task
-```
-PUT /api/tasks/:taskId
-Authorization: Bearer <token>
-
-{
-  "title": "Updated Title",
-  "description": "Updated description",
-  "listId": "new-list-uuid",
-  "position": 0
-}
-```
-
-#### Delete Task
-```
-DELETE /api/tasks/:taskId
-Authorization: Bearer <token>
-```
-
-#### Assign User to Task
-```
-POST /api/tasks/:taskId/assign
-Authorization: Bearer <token>
-
-{
-  "userId": "user-uuid"
-}
-```
-
-#### Remove User from Task
-```
-DELETE /api/tasks/:taskId/assign/:assignmentId
-Authorization: Bearer <token>
-```
-
-### Activity Endpoints
-
-#### Get Activity Logs
-```
-GET /api/activities/:boardId?page=1&limit=20
-Authorization: Bearer <token>
-```
-
-## Architecture Overview
-
-### Frontend Architecture
-
-```
-App (Router Setup)
-├── Auth Pages (Login/Signup)
-├── Boards List Page
-└── Board Detail Page
-    ├── Lists (Droppable)
-    │   └── Tasks (Draggable)
-    │       └── TaskCard Component
-    ├── Activity Panel
-    └── Add Member Modal
-
-State Management (Zustand)
-├── Auth Store (user, token)
-└── Board Store (boards, lists, tasks, members)
-
-Services
-├── API Service (axios with auth)
-└── Socket Service (real-time events)
-```
-
-### Backend Architecture
-
-```
-Server (Express + Socket.io)
-├── Routes
-│   ├── Auth Routes
-│   ├── Board Routes
-│   ├── List Routes
-│   ├── Task Routes
-│   └── Activity Routes
-├── Controllers (Business Logic)
-├── Middleware (Auth validation)
-├── Database Connection (PostgreSQL)
-└── Socket.io Handler (Real-time Events)
-```
-
-### Data Flow
-
-1. **Synchronous Operations**
-   - User action → API call → Server processes → DB update → Response → State update
-
-2. **Real-time Operations**
-   - Local state update (optimistic)
-   - WebSocket event emission
-   - Server broadcasts to room
-   - Other clients update via WebSocket listener
-
-## Database Schema
-
-### Tables
-
-#### users
-```sql
-- id (UUID PRIMARY KEY)
-- username (VARCHAR UNIQUE)
-- email (VARCHAR UNIQUE)
-- password_hash (VARCHAR)
-- created_at, updated_at (TIMESTAMP)
-```
-
-#### boards
-```sql
-- id (UUID PRIMARY KEY)
-- name, description (VARCHAR, TEXT)
-- owner_id (UUID FK → users)
-- created_at, updated_at (TIMESTAMP)
-```
-
-#### board_members
-```sql
-- id (UUID PRIMARY KEY)
-- board_id, user_id (UUID FK)
-- role (VARCHAR: 'owner' or 'member')
-- created_at (TIMESTAMP)
-- UNIQUE(board_id, user_id)
-```
-
-#### lists
-```sql
-- id (UUID PRIMARY KEY)
-- board_id (UUID FK → boards)
-- name (VARCHAR)
-- position (INTEGER)
-- created_at, updated_at (TIMESTAMP)
-```
-
-#### tasks
-```sql
-- id (UUID PRIMARY KEY)
-- list_id, board_id (UUID FK)
-- title, description (VARCHAR, TEXT)
-- position (INTEGER)
-- created_by (UUID FK → users)
-- created_at, updated_at (TIMESTAMP)
-```
-
-#### task_assignments
-```sql
-- id (UUID PRIMARY KEY)
-- task_id, user_id (UUID FK)
-- assigned_at (TIMESTAMP)
-- UNIQUE(task_id, user_id)
-```
-
-#### activity_logs
-```sql
-- id (UUID PRIMARY KEY)
-- board_id, user_id (UUID FK)
-- action (VARCHAR: 'create', 'update', 'delete', 'move', 'assign')
-- entity_type (VARCHAR: 'board', 'list', 'task', 'assignment')
-- entity_id (UUID)
-- changes (JSONB)
-- created_at (TIMESTAMP)
-```
-
-### Indexes
-- board_id, user_id, owner_id on boards
-- board_id, user_id on board_members
-- board_id on lists, tasks
-- task_id, user_id on task_assignments
-- board_id, created_at on activity_logs
-- username, email on users
-
-## Real-time Features
-
-### Socket.io Events
-
-**Client to Server:**
-- `authenticate`: { userId }
-- `join-board`: boardId
-- `leave-board`: boardId
-- `task-created`: task data
-- `task-updated`: task data
-- `task-moved`: task data with new list_id and position
-- `task-deleted`: task data
-- `list-created`: list data
-- `list-updated`: list data
-- `list-deleted`: list data
-- `user-assigned`: assignment data
-- `activity-logged`: activity data
-
-**Server to Client:**
-- Same events broadcast to all users in board room
-
-### Synchronization Strategy
-
-1. **Optimistic Updates**: UI updates immediately, reverts on error
-2. **Broadcast on Change**: Server broadcasts to all connected clients
-3. **Room-based Distribution**: Only users in board room receive events
-4. **Activity Logging**: Every change logged for audit trail
+---
 
 ## Demo Credentials
 
-### Pre-created Demo Accounts
-
-The following demo accounts are created after initial setup:
+Use these accounts to explore the platform:
 
 ```
 Account 1:
-- Email: demo@example.com
-- Username: demo_user
-- Password: password123
+Email: raj.sharma@example.com
+Password: Password123!
 
 Account 2:
-- Email: alice@example.com
-- Username: alice
-- Password: password123
+Email: priya.patel@example.com
+Password: Password123!
 ```
 
-### Test Flow
-
-1. Login with demo@example.com / password123
+**Quick Test:**
+1. Login with Account 1
 2. Create a new board
-3. Add alice@example.com as member
-4. Create lists (To Do, In Progress, Done)
-5. Add tasks and drag across lists
-6. Assign tasks to users
-7. View activity log
-8. Open another browser/tab, login as alice to see real-time updates
+3. Add priya.patel@example.com as a member
+4. Create lists and tasks
+5. Open incognito window, login as Account 2
+6. See real-time updates! ⚡
 
-## Deployment
+---
 
-### Production Checklist
+## Project Structure
 
-- [ ] Set strong `JWT_SECRET` environment variable
-- [ ] Configure `DATABASE_URL` for production PostgreSQL
-- [ ] Set `NODE_ENV=production`
-- [ ] Update CORS `origin` for production domain
-- [ ] Enable HTTPS for WebSocket connections
-- [ ] Setup database backups
-- [ ] Configure logging aggregation
-- [ ] Setup error monitoring (Sentry, etc.)
-- [ ] Optimize database indexes
-- [ ] Setup rate limiting
-- [ ] Configure CDN for frontend assets
-
-### Docker Deployment
-
-Create `Dockerfile` for backend:
-```dockerfile
-FROM node:18-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY src ./src
-COPY server.js .
-EXPOSE 5000
-CMD ["npm", "start"]
+```
+Hintro Assignment/
+├── backend/
+│   ├── src/
+│   │   ├── controllers/      # Business logic
+│   │   ├── routes/           # API routes
+│   │   ├── middleware/       # Auth middleware
+│   │   └── db.js            # Database connection
+│   ├── server.js            # Express server
+│   ├── schema.sql           # Database schema
+│   └── package.json
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/      # React components
+│   │   ├── pages/          # Page components
+│   │   ├── services/       # API & Socket services
+│   │   └── store/          # Zustand store
+│   └── package.json
+│
+├── API_DOCUMENTATION.md     # Complete API reference
+├── ARCHITECTURE.md          # System architecture
+├── DATABASE_SCHEMA.md       # Database design
+└── README.md
 ```
 
-Create `Dockerfile` for frontend:
-```dockerfile
-FROM node:18-alpine as builder
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . .
-RUN npm run build
+---
 
-FROM nginx:alpine
-COPY --from=builder /app/build /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
-```
+## Contributing
 
-### Cloud Deployment
+Contributions are welcome! Please follow these steps:
 
-**Azure App Service:**
-- Backend: Node.js on App Service
-- Frontend: Static Web App
-- Database: Azure Database for PostgreSQL
-- WebSocket: Enable on App Service
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-**AWS:**
-- Backend: EC2 or Elastic Beanstalk
-- Frontend: CloudFront + S3
-- Database: RDS PostgreSQL
-- WebSocket: Configure through ALB or API Gateway
-
-## Assumptions & Trade-offs
-
-### Assumptions
-
-1. **User Authentication**: JWT tokens stored in localStorage (frontend)
-2. **Authorization**: Board members can perform operations based on role
-3. **Concurrency**: Optimistic updates with server-side conflict resolution
-4. **WebSocket Reliability**: Assumes stable connection, client-side retry logic not implemented
-5. **Database Consistency**: SQLite not recommended for production (use PostgreSQL)
-
-### Trade-offs
-
-1. **Simplicity vs Features**: Skipped advanced features (labels, due dates, attachments) for core functionality
-2. **Real-time vs Scalability**: Socket.io for real-time, consider Redis adapter for multi-server setup
-3. **Performance vs Flexibility**: Activity logs stored as JSONB, could separate into normalized tables
-4. **UI/UX vs Development Speed**: Basic styling, could enhance with CSS framework like Material-UI
-5. **Security**: Basic JWT implementation, consider OAuth2/OIDC for enterprise
-
-### Scalability Considerations
-
-1. **Horizontal Scaling**:
-   - Use Redis adapter for Socket.io across multiple servers
-   - Use PostgreSQL connection pooling (PgBouncer)
-   - Implement load balancer (HAProxy, AWS ALB)
-
-2. **Database Optimization**:
-   - Add indexes on frequently queried fields (already done)
-   - Archive old activity logs to separate table
-   - Implement query caching with Redis
-
-3. **Frontend Optimization**:
-   - Code splitting and lazy loading
-   - Asset compression and CDN
-   - Service worker for offline support
-
-4. **Backend Optimization**:
-   - Implement API response caching
-   - Batch database operations
-   - Optimize Socket.io message serialization
-
-## Development Notes
-
-### Common Issues & Solutions
-
-**Issue**: WebSocket connection fails
-- **Solution**: Check CORS settings, ensure Socket.io URL matches server URL
-
-**Issue**: Real-time updates not syncing
-- **Solution**: Verify user is authenticated, check browser console for errors
-
-**Issue**: Database connection errors
-- **Solution**: Verify PostgreSQL is running, check DATABASE_URL format
-
-**Issue**: CORS errors on API calls
-- **Solution**: Update CORS origin in backend server.js to match frontend URL
-
-### Future Enhancements
-
-1. **Features**:
-   - File attachments
-   - Task due dates and reminders
-   - Comment threads
-   - Notifications
-   - Export/Import boards
-
-2. **Technical**:
-   - Unit tests with Jest
-   - E2E tests with Cypress
-   - GraphQL API alternative
-   - Mobile app (React Native)
-   - Dark mode
-   - Keyboard shortcuts
-
-## Support & Questions
-
-For issues or questions:
-1. Check the logs: `tail -f backend/logs.txt`
-2. Verify environment variables are set
-3. Check browser console for frontend errors
-4. Review database logs
+---
 
 ## License
 
-MIT
-# Hintro-Assignment
+This project is licensed under the MIT License.
+
+---
+
+## Support
+
+For questions or issues:
+- 📧 Email: abhirammarupaka2208@gmail.com
+- 🐛 Issues: [GitHub Issues](https://github.com/Abhirammm2208/Hintro-Assignment/issues)
+
+---
+
+**Built with ❤️ using React, Node.js, PostgreSQL, and Socket.io**
