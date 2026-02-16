@@ -1,0 +1,143 @@
+.task-card {
+  background: white;
+  border-radius: 4px;
+  padding: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+  cursor: grab;
+}
+
+.task-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.task-card.edit-mode {
+  cursor: default;
+  padding: 15px;
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.task-header h4 {
+  margin: 0;
+  color: #333;
+  font-size: 14px;
+  flex: 1;
+  cursor: pointer;
+}
+
+.task-header h4:hover {
+  text-decoration: underline;
+}
+
+.task-description {
+  color: #666;
+  font-size: 12px;
+  margin: 8px 0;
+  line-height: 1.4;
+}
+
+.task-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.assignees {
+  display: flex;
+  gap: 4px;
+}
+
+.assignee-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.btn-assign {
+  padding: 4px 8px;
+  background: #f0f0f0;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #666;
+}
+
+.btn-assign:hover {
+  background: #e0e0e0;
+}
+
+.edit-mode input,
+.edit-mode textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-family: inherit;
+}
+
+.edit-mode input:focus,
+.edit-mode textarea:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.assignee-selector {
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+.assignee-selector h5 {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  color: #666;
+}
+
+.member-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.member-btn {
+  padding: 6px 8px;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+  text-align: left;
+  transition: all 0.2s;
+}
+
+.member-btn:hover {
+  background: #f0f0f0;
+}
+
+.member-btn.assigned {
+  background: #667eea;
+  color: white;
+  border-color: #667eea;
+}

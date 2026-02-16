@@ -1,0 +1,219 @@
+.board-container {
+  padding: 20px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.board-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.board-header h1 {
+  margin: 0;
+  color: #333;
+  font-size: 28px;
+}
+
+.board-header p {
+  margin: 5px 0 0 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.add-member-form {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.add-member-form input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+}
+
+.board-content {
+  display: flex;
+  gap: 20px;
+}
+
+.lists-container {
+  flex: 1;
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+.list {
+  flex-shrink: 0;
+  width: 300px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.list.dragging-over {
+  background: #e8eaf6;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.list-header h3 {
+  margin: 0;
+  color: #333;
+  font-size: 16px;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0 5px;
+}
+
+.btn-icon:hover {
+  color: #f44;
+}
+
+.tasks-list {
+  flex: 1;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.tasks-list .dragging {
+  opacity: 0.5;
+}
+
+.new-task-form {
+  display: flex;
+  gap: 5px;
+}
+
+.new-task-form input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.add-list-section {
+  flex-shrink: 0;
+  width: 300px;
+}
+
+.new-list-form {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.new-list-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.btn-add-list {
+  width: 100%;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.3);
+  border: 2px dashed #999;
+  border-radius: 8px;
+  color: #666;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.btn-add-list:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.activity-panel {
+  width: 300px;
+  background: white;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.activity-panel h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.activities-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.activity-item {
+  padding: 10px;
+  background: #f5f5f5;
+  border-radius: 4px;
+  border-left: 3px solid #667eea;
+}
+
+.activity-item small {
+  color: #667eea;
+  font-weight: 600;
+}
+
+.activity-item p {
+  margin: 5px 0;
+  color: #333;
+  font-size: 13px;
+}
+
+.activity-item time {
+  font-size: 11px;
+  color: #999;
+}
+
+.error {
+  background: #fee;
+  color: #c33;
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
