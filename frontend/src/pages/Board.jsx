@@ -12,8 +12,6 @@ import {
   Button,
   TextField,
   Paper,
-  Card,
-  CardContent,
   Drawer,
   List,
   ListItem,
@@ -29,7 +27,6 @@ import {
   Divider,
   Badge,
   Tooltip,
-  AvatarGroup,
 } from '@mui/material';
 import {
   ArrowBack,
@@ -39,7 +36,6 @@ import {
   PersonAdd,
   People,
   Close,
-  Email,
   CheckCircle,
 } from '@mui/icons-material';
 import toast from 'react-hot-toast';

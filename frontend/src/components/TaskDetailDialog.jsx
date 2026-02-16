@@ -1,35 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   Dialog,
-  DialogTitle,
   DialogContent,
-  DialogActions,
   Box,
   Typography,
   TextField,
   Button,
   IconButton,
   Avatar,
-  Divider,
   Paper,
   Chip,
   CircularProgress,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  Tooltip,
-  MenuItem,
 } from '@mui/material';
 import {
   Close,
-  Send,
   Delete,
-  PersonAdd,
-  Edit as EditIcon,
-  Event,
 } from '@mui/icons-material';
-import { motion, AnimatePresence } from 'framer-motion';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
@@ -50,17 +36,12 @@ const TaskDetailDialog = ({ open, onClose, task, onTaskUpdate }) => {
   const commentsEndRef = useRef(null);
   const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
 
-  useEffect(() => {
-    if (open && task) {
-      fetchComments();
-    }
-  }, [open, task]);
+  const scrollToBottom = useCallback(() => {
+    commentsEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, []);
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [comments]);
-
-  const fetchComments = async () => {
+  const fetchComments = useCallback(async () => {
+    if (!task?.id) return;
     setLoading(true);
     try {
       const response = await commentService.getTaskComments(task.id);
@@ -71,7 +52,17 @@ const TaskDetailDialog = ({ open, onClose, task, onTaskUpdate }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [task?.id]);
+
+  useEffect(() => {
+    if (open && task) {
+      fetchComments();
+    }
+  }, [open, task, fetchComments]);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [comments, scrollToBottom]);
 
   const handleSendComment = async (e) => {
     e.preventDefault();
@@ -134,10 +125,6 @@ const TaskDetailDialog = ({ open, onClose, task, onTaskUpdate }) => {
     if (Object.keys(updates).length > 0) {
       handleUpdateTask(updates);
     }
-  };
-
-  const scrollToBottom = () => {
-    commentsEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const formatDate = (dateString) => {

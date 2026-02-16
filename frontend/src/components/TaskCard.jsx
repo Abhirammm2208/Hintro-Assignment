@@ -31,7 +31,6 @@ import {
   CheckCircle,
   ChatBubbleOutline,
   Event,
-  Label as LabelIcon,
 } from '@mui/icons-material';
 import toast from 'react-hot-toast';
 import { taskService } from '../services/api';
@@ -272,7 +271,6 @@ const TaskCard = ({ task, boardId, isDragging }) => {
 };
 
 const AssigneeSelector = ({ task, open, onClose }) => {
-  const { members, tasks } = useBoardStore();
   const [allUsers, setAllUsers] = useState([]);
   const [loadingUsers, setLoadingUsers] = useState(false);
 
