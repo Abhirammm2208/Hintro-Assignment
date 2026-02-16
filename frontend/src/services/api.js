@@ -17,8 +17,8 @@ apiClient.interceptors.request.use((config) => {
 
 // Auth service
 export const authService = {
-  signup: (username, email, password) =>
-    apiClient.post('/auth/signup', { username, email, password }),
+  signup: (username, email, password, firstName, lastName) =>
+    apiClient.post('/auth/signup', { username, email, password, firstName, lastName }),
   login: (email, password) =>
     apiClient.post('/auth/login', { email, password }),
   getCurrentUser: () =>
@@ -55,16 +55,32 @@ export const listService = {
 
 // Task service
 export const taskService = {
-  createTask: (listId, boardId, title, description) =>
-    apiClient.post('/tasks', { listId, boardId, title, description }),
-  updateTask: (id, title, description, listId, position) =>
-    apiClient.put(`/tasks/${id}`, { title, description, listId, position }),
+  createTask: (listId, boardId, title, description, dueDate, priority) =>
+    apiClient.post('/tasks', { listId, boardId, title, description, dueDate, priority }),
+  updateTask: (id, updates) =>
+    apiClient.put(`/tasks/${id}`, updates),
   deleteTask: (id) =>
     apiClient.delete(`/tasks/${id}`),
   assignUserToTask: (taskId, userId) =>
     apiClient.post(`/tasks/${taskId}/assign`, { userId }),
   removeUserFromTask: (taskId, assignmentId) =>
     apiClient.delete(`/tasks/${taskId}/assign/${assignmentId}`),
+};
+
+// Label service
+export const labelService = {
+  getBoardLabels: (boardId) =>
+    apiClient.get(`/labels/board/${boardId}`),
+  createLabel: (boardId, name, color) =>
+    apiClient.post('/labels', { boardId, name, color }),
+  updateLabel: (id, name, color) =>
+    apiClient.put(`/labels/${id}`, { name, color }),
+  deleteLabel: (id) =>
+    apiClient.delete(`/labels/${id}`),
+  addLabelToTask: (taskId, labelId) =>
+    apiClient.post(`/labels/task/${taskId}`, { labelId }),
+  removeLabelFromTask: (taskId, labelId) =>
+    apiClient.delete(`/labels/task/${taskId}/${labelId}`),
 };
 
 // Activity service

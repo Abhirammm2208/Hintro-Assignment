@@ -104,16 +104,31 @@ const getBoardById = async (req, res) => {
       [id]
     );
 
-    // Get tasks with assignees
+    // Get tasks with assignees and labels
     const tasksResult = await pool.query(
       `SELECT t.*, 
         COALESCE(json_agg(
-          json_build_object('id', ta.id, 'user_id', ta.user_id, 'username', u.username)
-        ) FILTER (WHERE ta.id IS NOT NULL), '[]'::json) as assigned_users
+          DISTINCT jsonb_build_object(
+            'id', ta.id, 
+            'user_id', ta.user_id, 
+            'username', u.username,
+            'first_name', u.first_name,
+            'last_name', u.last_name
+          )
+        ) FILTER (WHERE ta.id IS NOT NULL), '[]'::json) as assigned_users,
+        COALESCE(json_agg(
+          DISTINCT jsonb_build_object(
+            'id', l.id,
+            'name', l.name,
+            'color', l.color
+          )
+        ) FILTER (WHERE l.id IS NOT NULL), '[]'::json) as labels
        FROM tasks t
        LEFT JOIN task_assignments ta ON t.id = ta.task_id
        LEFT JOIN users u ON ta.user_id = u.id
-       WHERE t.board_id = $1
+       LEFT JOIN task_labels tl ON t.id = tl.task_id
+       LEFT JOIN labels l ON tl.label_id = l.id
+       WHERE t.board_id = $1 AND t.archived = FALSE
        GROUP BY t.id
        ORDER BY t.list_id, t.position ASC`,
       [id]

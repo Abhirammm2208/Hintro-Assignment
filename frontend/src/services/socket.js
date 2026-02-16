@@ -6,7 +6,12 @@ export const connectSocket = (userId) => {
   if (socket) return socket;
 
   socket = io(process.env.REACT_APP_SOCKET_URL || 'http://localhost:5000', {
-    transports: ['websocket'],
+    transports: ['websocket', 'polling'],
+    upgrade: true,
+    reconnection: true,
+    reconnectionDelay: 1000,
+    reconnectionAttempts: 5,
+    path: '/socket.io',
   });
 
   socket.on('connect', () => {
@@ -16,6 +21,10 @@ export const connectSocket = (userId) => {
 
   socket.on('disconnect', () => {
     console.log('Disconnected from socket server');
+  });
+
+  socket.on('connect_error', (error) => {
+    console.error('Socket connection error:', error);
   });
 
   return socket;

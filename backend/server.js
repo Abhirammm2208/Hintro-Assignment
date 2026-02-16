@@ -9,6 +9,8 @@ const boardRoutes = require('./src/routes/boardRoutes');
 const listRoutes = require('./src/routes/listRoutes');
 const taskRoutes = require('./src/routes/taskRoutes');
 const activityRoutes = require('./src/routes/activityRoutes');
+const commentRoutes = require('./src/routes/commentRoutes');
+const labelRoutes = require('./src/routes/labelRoutes');
 
 const app = express();
 const server = http.createServer(app);
@@ -31,6 +33,8 @@ app.use('/api/boards', boardRoutes);
 app.use('/api/lists', listRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/activities', activityRoutes);
+app.use('/api', commentRoutes);
+app.use('/api/labels', labelRoutes);
 
 // Health check
 app.get('/health', (req, res) => {
@@ -107,6 +111,11 @@ io.on('connection', (socket) => {
   // Activity logged event
   socket.on('activity-logged', (data) => {
     io.to(`board-${data.boardId}`).emit('activity-logged', data);
+  });
+
+  // Comment added event
+  socket.on('comment-added', (data) => {
+    io.to(`board-${data.boardId}`).emit('comment-added', data);
   });
 
   // Disconnect
