@@ -188,16 +188,12 @@ npm start
 
 ## Demo Credentials
 
-Use these accounts to explore the platform:
+Use this account to explore the platform:
 
 ```
-Account 1:
-Email: raj.sharma@example.com
-Password: Password123!
+Email: assessment.eval@hintro.com
+Password: Password@123
 
-Account 2:
-Email: priya.patel@example.com
-Password: Password123!
 ```
 
 **Quick Test:**
